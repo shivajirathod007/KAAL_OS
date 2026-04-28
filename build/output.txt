@@ -1,0 +1,125 @@
+══════════════════════════════════════════════
+JOB 1  TTL=50  TLL=100
+Job1 Happy Path
+╔══════════════════════════════════════════╗
+║  JOB    1  TERMINATED  CODE:0
+║  STATUS : NORMAL EXECUTION COMPLETED
+╠══════════════════════════════════════════╣
+║  IC=3  IR=H   
+║  TTC=3/50  TLC=1/100
+║  SI=3 PI=0 TI=0  Toggle=F
+╠══════════════════════════════════════════╣
+║  EXECUTION LOG:
+║    [ GD] Get Data -> VA=10
+║    [PF-GD] Page fault resolved  Logical=1 -> Physical=26
+║    [GD] Data loaded into block 26 (phys rows 260-269)  data="Job1 Happy Path"
+║    [ PD] Print Data -> VA=10
+║    [PD] Printed block 26  output="Job1 Happy Path"
+║    [ H ] Halt instruction encountered
+╚══════════════════════════════════════════╝
+
+══════════════════════════════════════════════
+JOB 2  TTL=50  TLL=100
+╔══════════════════════════════════════════╗
+║  JOB    2  TERMINATED  CODE:4
+║  STATUS : OPERATION CODE ERROR (invalid opcode)
+╠══════════════════════════════════════════╣
+║  IC=1  IR=XX10
+║  TTC=1/50  TLC=0/100
+║  SI=0 PI=1 TI=0  Toggle=F
+╠══════════════════════════════════════════╣
+║  EXECUTION LOG:
+║    [ERR] Unknown opcode: 'XX'
+╚══════════════════════════════════════════╝
+
+══════════════════════════════════════════════
+JOB 3  TTL=2  TLL=100
+Job3 TLE
+Job3 TLE
+╔══════════════════════════════════════════╗
+║  JOB    3  TERMINATED  CODE:3
+║  STATUS : TIME LIMIT EXCEEDED (TTC > TTL)
+╠══════════════════════════════════════════╣
+║  IC=3  IR=PD10
+║  TTC=3/2  TLC=2/100
+║  SI=2 PI=0 TI=2  Toggle=F
+╠══════════════════════════════════════════╣
+║  EXECUTION LOG:
+║    [ GD] Get Data -> VA=10
+║    [PF-GD] Page fault resolved  Logical=1 -> Physical=5
+║    [GD] Data loaded into block 5 (phys rows 50-59)  data="Job3 TLE"
+║    [ PD] Print Data -> VA=10
+║    [PD] Printed block 5  output="Job3 TLE"
+║    [ PD] Print Data -> VA=10
+║    [PD] Printed block 5  output="Job3 TLE"
+╚══════════════════════════════════════════╝
+
+══════════════════════════════════════════════
+JOB 4  TTL=50  TLL=0
+╔══════════════════════════════════════════╗
+║  JOB    4  TERMINATED  CODE:2
+║  STATUS : LINE LIMIT EXCEEDED (TLC > TLL)
+╠══════════════════════════════════════════╣
+║  IC=2  IR=PD10
+║  TTC=2/50  TLC=1/0
+║  SI=2 PI=0 TI=2  Toggle=F
+╠══════════════════════════════════════════╣
+║  EXECUTION LOG:
+║    [ GD] Get Data -> VA=10
+║    [PF-GD] Page fault resolved  Logical=1 -> Physical=17
+║    [GD] Data loaded into block 17 (phys rows 170-179)  data="Job4 LLE"
+║    [ PD] Print Data -> VA=10
+║    [LLE] Line limit exceeded  TLC=1 TLL=0
+╚══════════════════════════════════════════╝
+
+══════════════════════════════════════════════
+JOB 5  TTL=50  TLL=100
+╔══════════════════════════════════════════╗
+║  JOB    5  TERMINATED  CODE:6
+║  STATUS : INVALID PAGE FAULT (unmapped data access)
+╠══════════════════════════════════════════╣
+║  IC=1  IR=PD10
+║  TTC=1/50  TLC=0/100
+║  SI=2 PI=3 TI=0  Toggle=F
+╠══════════════════════════════════════════╣
+║  EXECUTION LOG:
+║    [ PD] Print Data -> VA=10
+╚══════════════════════════════════════════╝
+
+══════════════════════════════════════════════
+JOB 6  TTL=50  TLL=100
+╔══════════════════════════════════════════╗
+║  JOB    6  TERMINATED  CODE:5
+║  STATUS : OPERAND ERROR (invalid address)
+╠══════════════════════════════════════════╣
+║  IC=1  IR=GDXX
+║  TTC=1/50  TLC=0/100
+║  SI=0 PI=2 TI=0  Toggle=F
+╠══════════════════════════════════════════╣
+║  EXECUTION LOG:
+║    [ERR] Bad operand: XX
+╚══════════════════════════════════════════╝
+
+══════════════════════════════════════════════
+JOB 7  TTL=10  TLL=100
+012000330153
+╔══════════════════════════════════════════╗
+║  JOB    7  TERMINATED  CODE:0
+║  STATUS : NORMAL EXECUTION COMPLETED
+╠══════════════════════════════════════════╣
+║  IC=6  IR=H   
+║  TTC=6/10  TLC=1/100
+║  SI=3 PI=0 TI=0  Toggle=F
+╠══════════════════════════════════════════╣
+║  EXECUTION LOG:
+║    [ GD] Get Data -> VA=10
+║    [PF-GD] Page fault resolved  Logical=1 -> Physical=14
+║    [GD] Data loaded into block 14 (phys rows 140-149)  data="01200033"
+║    [ LR] GPR <- M[10] = [0120]
+║    [ AD] GPR=120 + M[11]=33 = 153
+║    [ SR] M[12] <- GPR = [0153]
+║    [ PD] Print Data -> VA=12
+║    [PD] Printed block 14  output="012000330153"
+║    [ H ] Halt instruction encountered
+╚══════════════════════════════════════════╝
+

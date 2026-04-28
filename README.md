@@ -1,6 +1,4 @@
 <h1 align="center">
-  <img src="img/image.png" alt="KAAL OS CLI" width="860"/>
-  <br/>
   KAAL OS — Operating System Simulator
 </h1>
 
