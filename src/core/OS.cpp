@@ -109,19 +109,29 @@ void OS::TERMINATE(int ec) {
 
     string irStr   = string(1,cpu.IR[0])  + cpu.IR[1]  + cpu.IR[2]  + cpu.IR[3];
     string gprTrim = trimRight(string(1,cpu.GPR[0]) + cpu.GPR[1] + cpu.GPR[2] + cpu.GPR[3]);
-    string ttcStr  = to_string(pcb.TTC)+"/" +to_string(pcb.TTL);
-    string tlcStr  = to_string(pcb.TLC)+"/" +to_string(pcb.TLL);
+    string ttcStr  = to_string(pcb.TTC)+"/"+to_string(pcb.TTL);
+    string tlcStr  = to_string(pcb.TLC)+"/"+to_string(pcb.TLL);
     string intStr  = "SI="+to_string(cpu.SI)+" PI="+to_string(cpu.PI)+" TI="+to_string(cpu.TI);
 
+    // Fixed-width box helper: pads content to W chars then appends closing ║
+    const int W = 46;
+    string hbar(W+2, '=');
+    auto boxLine = [&](const string& col, const string& content) {
+        string padded = content;
+        if ((int)padded.size() < W) padded += string(W - padded.size(), ' ');
+        else padded = padded.substr(0, W);
+        cout << "  " << col << "\u2551  " << padded << "\u2551\033[0m\n";
+    };
+
     // ── stdout banner ──
-    cout << "\n  " << sev[ec] << "╔══════════════════════════════════════════╗\033[0m\n";
-    cout << "  " << sev[ec] << "║  JOB " << pcb.job_id << "  TERMINATED  [CODE:" << ec << "]\033[0m\n";
-    cout << "  " << sev[ec] << "║  " << msgs[ec] << "\033[0m\n";
-    cout << "  " << sev[ec] << "╠══════════════════════════════════════════╣\033[0m\n";
-    cout << "  " << sev[ec] << "║  IC=" << cpu.IC << "  IR=" << irStr << "  GPR=[" << gprTrim << "]\033[0m\n";
-    cout << "  " << sev[ec] << "║  TTC=" << ttcStr << "  TLC=" << tlcStr << "  PTR=" << cpu.PTR << "\033[0m\n";
-    cout << "  " << sev[ec] << "║  " << intStr << "  Toggle=" << (cpu.Toggle ? "T" : "F") << "\033[0m\n";
-    cout << "  " << sev[ec] << "╚══════════════════════════════════════════╝\033[0m\n\n";
+    cout << "\n  " << sev[ec] << "\u2554" << string(W+2,'\u2550') << "\u2557\033[0m\n";
+    boxLine(sev[ec], "JOB "+to_string(pcb.job_id)+"  TERMINATED  [CODE:"+to_string(ec)+"]");
+    boxLine(sev[ec], string(msgs[ec]));
+    cout << "  " << sev[ec] << "\u2560" << string(W+2,'\u2550') << "\u2563\033[0m\n";
+    boxLine(sev[ec], "IC="+to_string(cpu.IC)+"  IR="+irStr+"  GPR=["+gprTrim+"]");
+    boxLine(sev[ec], "TTC="+ttcStr+"  TLC="+tlcStr+"  PTR="+to_string(cpu.PTR));
+    boxLine(sev[ec], intStr+"  Toggle="+(cpu.Toggle ? "T" : "F"));
+    cout << "  " << sev[ec] << "\u255a" << string(W+2,'\u2550') << "\u255d\033[0m\n\n";
 
     // ── output.txt report ──
     outfile << "╔══════════════════════════════════════════╗\n";

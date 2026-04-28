@@ -11,10 +11,10 @@ Job1 Happy Path
 ╠══════════════════════════════════════════╣
 ║  EXECUTION LOG:
 ║    [ GD] Get Data -> VA=10
-║    [PF-GD] Page fault resolved  Logical=1 -> Physical=26
-║    [GD] Data loaded into block 26 (phys rows 260-269)  data="Job1 Happy Path"
+║    [PF-GD] Page fault resolved  Logical=1 -> Physical=6
+║    [GD] Data loaded into block 6 (phys rows 60-69)  data="Job1 Happy Path"
 ║    [ PD] Print Data -> VA=10
-║    [PD] Printed block 26  output="Job1 Happy Path"
+║    [PD] Printed block 6  output="Job1 Happy Path"
 ║    [ H ] Halt instruction encountered
 ╚══════════════════════════════════════════╝
 
@@ -46,12 +46,12 @@ Job3 TLE
 ╠══════════════════════════════════════════╣
 ║  EXECUTION LOG:
 ║    [ GD] Get Data -> VA=10
-║    [PF-GD] Page fault resolved  Logical=1 -> Physical=5
-║    [GD] Data loaded into block 5 (phys rows 50-59)  data="Job3 TLE"
+║    [PF-GD] Page fault resolved  Logical=1 -> Physical=0
+║    [GD] Data loaded into block 0 (phys rows 0-9)  data="Job3 TLE"
 ║    [ PD] Print Data -> VA=10
-║    [PD] Printed block 5  output="Job3 TLE"
+║    [PD] Printed block 0  output="Job3 TLE"
 ║    [ PD] Print Data -> VA=10
-║    [PD] Printed block 5  output="Job3 TLE"
+║    [PD] Printed block 0  output="Job3 TLE"
 ╚══════════════════════════════════════════╝
 
 ══════════════════════════════════════════════
@@ -66,8 +66,8 @@ JOB 4  TTL=50  TLL=0
 ╠══════════════════════════════════════════╣
 ║  EXECUTION LOG:
 ║    [ GD] Get Data -> VA=10
-║    [PF-GD] Page fault resolved  Logical=1 -> Physical=17
-║    [GD] Data loaded into block 17 (phys rows 170-179)  data="Job4 LLE"
+║    [PF-GD] Page fault resolved  Logical=1 -> Physical=10
+║    [GD] Data loaded into block 10 (phys rows 100-109)  data="Job4 LLE"
 ║    [ PD] Print Data -> VA=10
 ║    [LLE] Line limit exceeded  TLC=1 TLL=0
 ╚══════════════════════════════════════════╝
@@ -113,13 +113,13 @@ JOB 7  TTL=10  TLL=100
 ╠══════════════════════════════════════════╣
 ║  EXECUTION LOG:
 ║    [ GD] Get Data -> VA=10
-║    [PF-GD] Page fault resolved  Logical=1 -> Physical=14
-║    [GD] Data loaded into block 14 (phys rows 140-149)  data="01200033"
+║    [PF-GD] Page fault resolved  Logical=1 -> Physical=7
+║    [GD] Data loaded into block 7 (phys rows 70-79)  data="01200033"
 ║    [ LR] GPR <- M[10] = [0120]
 ║    [ AD] GPR=120 + M[11]=33 = 153
 ║    [ SR] M[12] <- GPR = [0153]
 ║    [ PD] Print Data -> VA=12
-║    [PD] Printed block 14  output="012000330153"
+║    [PD] Printed block 7  output="012000330153"
 ║    [ H ] Halt instruction encountered
 ╚══════════════════════════════════════════╝
 
